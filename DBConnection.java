@@ -93,7 +93,6 @@ public class DBConnection {
             }
         } catch (SQLException e) {
             System.err.println("Database setup failed: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 }

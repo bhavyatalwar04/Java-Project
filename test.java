@@ -80,12 +80,10 @@ public class Test {
                 } else {
                     frame.dispose();
                     switch (role) {
-                        case "Librarian":
+                        case "Librarian" ->
                             showLibrarianMenu();
-                            break;
-                        case "Student":
+                        case "Student" ->
                             showStudentMenu();
-                            break;
                     }
                 }
             } else {
