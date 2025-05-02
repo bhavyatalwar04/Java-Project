@@ -1,13 +1,14 @@
+
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.border.Border;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JButton;
+import javax.swing.border.Border;
 
 public class Main implements ActionListener {
 
@@ -61,5 +62,5 @@ public class Main implements ActionListener {
             Test.main(null); // Open the Login Screen
         }
     }
-    
+
 }
