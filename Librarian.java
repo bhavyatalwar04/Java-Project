@@ -1,3 +1,4 @@
+
 import java.sql.*;
 import javax.swing.*;
 
@@ -89,9 +90,9 @@ public class Librarian {
             StringBuilder sb = new StringBuilder();
             while (rs.next()) {
                 sb.append("ID: ").append(rs.getInt("id"))
-                  .append(", Name: ").append(rs.getString("name"))
-                  .append(", Status: ").append(rs.getBoolean("active") ? "Active" : "Inactive")
-                  .append("\n");
+                        .append(", Name: ").append(rs.getString("name"))
+                        .append(", Status: ").append(rs.getBoolean("active") ? "Active" : "Inactive")
+                        .append("\n");
             }
             JOptionPane.showMessageDialog(null, sb.toString(), "Student Details", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {

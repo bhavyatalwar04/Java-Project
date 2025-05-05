@@ -198,7 +198,7 @@ public class Test extends Student {
     }
 
     private static void showAdminMenu() {
-        JFrame frame = new JFrame("Admin Panel");
+        JFrame frame = new JFrame("Admin Dashboard");
         frame.setSize(400, 400);
         JPanel panel = new JPanel(new GridLayout(7, 1));
 
@@ -253,68 +253,81 @@ public class Test extends Student {
     }
 
     private static void showLibrarianMenu() {
-        String[] options = {
-            "Add Book", "View Books", "Delete Book",
-            "Issue Book", "Return Book", "View Issued Books",
-            "View Overdue Books", "View Student Details", "Logout"
-        };
+        JFrame frame = new JFrame("Librarian Dashboard");
+        frame.setSize(400, 500);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        while (true) {
-            int choice = JOptionPane.showOptionDialog(null, "Librarian Dashboard", "Options",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
-                    options, options[0]);
+        JPanel panel = new JPanel(new GridLayout(9, 1, 10, 10));
+        panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
-            switch (choice) {
-                case 0:
-                    String book = JOptionPane.showInputDialog("Enter Book Title:");
-                    if (book != null && !book.trim().isEmpty()) {
-                        librarian.addBook(book.trim());
-                    }
-                    break;
-                case 1:
-                    librarian.viewBooks();
-                    break;
-                case 2:
-                    String delBook = JOptionPane.showInputDialog("Enter Book Title to Delete:");
-                    if (delBook != null && !delBook.trim().isEmpty()) {
-                        librarian.deleteBook(delBook.trim());
-                    }
-                    break;
-                case 3:
-                    try {
-                        int bookId = Integer.parseInt(JOptionPane.showInputDialog("Enter Book ID:"));
-                        int studentId = Integer.parseInt(JOptionPane.showInputDialog("Enter Student ID:"));
-                        librarian.issueBook(bookId, studentId);
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(null, "Invalid input. Please enter numeric IDs.");
-                    }
-                    break;
-                case 4:
-                    try {
-                        int bookId = Integer.parseInt(JOptionPane.showInputDialog("Enter Book ID:"));
-                        int studentId = Integer.parseInt(JOptionPane.showInputDialog("Enter Student ID:"));
-                        librarian.returnBook(bookId, studentId);
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(null, "Invalid input. Please enter numeric IDs.");
-                    }
-                    break;
-                case 5:
-                    librarian.viewIssuedBooks();
-                    break;
-                case 6:
-                    librarian.viewOverdueBooks();
-                    break;
-                case 7:
-                    librarian.viewStudentDetails();
-                    break;
-                case 8:
-                    JOptionPane.showMessageDialog(null, "Logging out...");
-                    showLoginScreen();
-                    return;
-                default:
-                    JOptionPane.showMessageDialog(null, "Invalid selection.");
+        JButton addBookBtn = new JButton("Add Book");
+        JButton viewBooksBtn = new JButton("View Books");
+        JButton deleteBookBtn = new JButton("Delete Book");
+        JButton issueBookBtn = new JButton("Issue Book");
+        JButton returnBookBtn = new JButton("Return Book");
+        JButton viewIssuedBtn = new JButton("View Issued Books");
+        JButton viewOverdueBtn = new JButton("View Overdue Books");
+        JButton viewStudentsBtn = new JButton("View Student Details");
+        JButton logoutBtn = new JButton("Logout");
+
+        addBookBtn.addActionListener(e -> {
+            String book = JOptionPane.showInputDialog("Enter Book Title:");
+            if (book != null && !book.trim().isEmpty()) {
+                librarian.addBook(book.trim());
             }
-        }
+        });
+
+        viewBooksBtn.addActionListener(e -> librarian.viewBooks());
+
+        deleteBookBtn.addActionListener(e -> {
+            String delBook = JOptionPane.showInputDialog("Enter Book Title to Delete:");
+            if (delBook != null && !delBook.trim().isEmpty()) {
+                librarian.deleteBook(delBook.trim());
+            }
+        });
+
+        issueBookBtn.addActionListener(e -> {
+            try {
+                int bookId = Integer.parseInt(JOptionPane.showInputDialog("Enter Book ID:"));
+                int studentId = Integer.parseInt(JOptionPane.showInputDialog("Enter Student ID:"));
+                librarian.issueBook(bookId, studentId);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(frame, "Please enter valid numeric IDs.");
+            }
+        });
+
+        returnBookBtn.addActionListener(e -> {
+            try {
+                int bookId = Integer.parseInt(JOptionPane.showInputDialog("Enter Book ID:"));
+                int studentId = Integer.parseInt(JOptionPane.showInputDialog("Enter Student ID:"));
+                librarian.returnBook(bookId, studentId);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(frame, "Please enter valid numeric IDs.");
+            }
+        });
+
+        viewIssuedBtn.addActionListener(e -> librarian.viewIssuedBooks());
+        viewOverdueBtn.addActionListener(e -> librarian.viewOverdueBooks());
+        viewStudentsBtn.addActionListener(e -> librarian.viewStudentDetails());
+
+        logoutBtn.addActionListener(e -> {
+            frame.dispose();
+            showLoginScreen();
+        });
+
+        panel.add(addBookBtn);
+        panel.add(viewBooksBtn);
+        panel.add(deleteBookBtn);
+        panel.add(issueBookBtn);
+        panel.add(returnBookBtn);
+        panel.add(viewIssuedBtn);
+        panel.add(viewOverdueBtn);
+        panel.add(viewStudentsBtn);
+        panel.add(logoutBtn);
+
+        frame.add(panel);
+        frame.setVisible(true);
     }
 
     private static void showStudentMenu() {
