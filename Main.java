@@ -1,19 +1,20 @@
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.border.Border;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.border.Border;
+import javax.swing.JButton;
 
 public class Main implements ActionListener {
 
     JFrame frame;
-    JButton button;
+    JButton loginButton;
+    JButton signupButton;
 
     public static void main(String[] args) {
         Main mainApp = new Main();
@@ -45,22 +46,34 @@ public class Main implements ActionListener {
         textLabel.setHorizontalAlignment(JLabel.CENTER);
         frame.add(textLabel);
 
-        button = new JButton("Login");
-        button.setBounds(250, 470, 100, 40);
-        button.addActionListener(this); // "this" points to Main class which implements ActionListener
-        button.setFocusPainted(false);
-        button.setFont(new Font("Arial", Font.PLAIN, 16));
-        frame.add(button);
+        loginButton = new JButton("Login");
+        loginButton.setBounds(250, 470, 100, 40);
+        loginButton.addActionListener(this);
+        loginButton.setFocusPainted(false);
+        loginButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        frame.add(loginButton);
+
+        // New Signup Button
+        signupButton = new JButton("Signup");
+        signupButton.setBounds(250, 520, 100, 40);
+        signupButton.setFocusPainted(false);
+        signupButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        signupButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new SignupForm(); // Open the Signup form
+            }
+        });
+        frame.add(signupButton);
 
         frame.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == button) {
+        if (e.getSource() == loginButton) {
             frame.dispose(); // Close the Welcome Screen
             Test.main(null); // Open the Login Screen
         }
     }
-
 }
